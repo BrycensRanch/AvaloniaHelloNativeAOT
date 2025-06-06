@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <PublishAot>true</PublishAot>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <!-- Recommended Avalonia trimming settings for Native AOT -->
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+        <TrimMode>full</TrimMode>
+        <PublishTrimmed>true</PublishTrimmed>
+        <Optimize>true</Optimize>
+        <OptimizationPreference>Size</OptimizationPreference>
+        <AvaloniaVersion>11.3.1</AvaloniaVersion>
+        <SkiaSharpVersion>3.119.0</SkiaSharpVersion>
+        <HarfBuzzSharpVersion>8.3.1.1</HarfBuzzSharpVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <DebugSymbols>false</DebugSymbols>
+        <DebugType>none</DebugType>
+        <!-- End users expect for a terminal not to open when running our application. -->
+        <!-- During development on Windows though, this is very helpful. -->
+        <OutputType>WinExe</OutputType>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="$(AvaloniaVersion)" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="HarfBuzzSharp" Version="$(HarfBuzzSharpVersion)" />
+        <PackageReference Include="HarfBuzzSharp.NativeAssets.Linux" Version="$(HarfBuzzSharpVersion)" />
+        <PackageReference Include="HarfBuzzSharp.NativeAssets.macOS" Version="$(HarfBuzzSharpVersion)" />
+        <PackageReference Include="HarfBuzzSharp.NativeAssets.Win32" Version="$(HarfBuzzSharpVersion)" />
+        <PackageReference Include="SkiaSharp" Version="$(SkiaSharpVersion)" />
+        <!-- We prefer the NoDependencies flavor, removes dependency on fontconfig -->
+        <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="$(SkiaSharpVersion)" ExcludeAssets="all" />
+        <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="$(SkiaSharpVersion)" />
+        <PackageReference Include="SkiaSharp.NativeAssets.macOS" Version="$(SkiaSharpVersion)" />
+        <PackageReference Include="SkiaSharp.NativeAssets.Win32" Version="$(SkiaSharpVersion)" />
+    </ItemGroup>
+
+</Project>
